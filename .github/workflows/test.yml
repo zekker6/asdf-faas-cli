@@ -17,7 +17,7 @@ jobs:
         uses: asdf-vm/actions/install@v1
 
       - name: Run plugin add
-        run: asdf plugin add assh https://github.com/zekker6/asdf-faas-cli.git
+        run: asdf plugin add faas-cli https://github.com/zekker6/asdf-faas-cli.git
 
       - name: Run plugin test
         run: asdf plugin test asdf-faas-cli .
