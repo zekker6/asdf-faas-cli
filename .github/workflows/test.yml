@@ -16,11 +16,11 @@ jobs:
       - name: Install asdf dependencies
         uses: asdf-vm/actions/install@v1
 
-      - name: Run plugin test
-        run: asdf plugin test asdf-faas-cli .
-
       - name: Run plugin add
         run: asdf plugin add assh https://github.com/zekker6/asdf-faas-cli.git
+
+      - name: Run plugin test
+        run: asdf plugin test asdf-faas-cli .
 
       - name: Run install
         run: asdf install asdf-faas-cli latest
