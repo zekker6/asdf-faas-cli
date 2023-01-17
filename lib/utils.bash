@@ -36,11 +36,38 @@ download_release() {
   local version filename url
   version="$1"
   filename="$2"
-  local operating_system="$(uname | tr '[:upper:]' '[:lower:]')"
+  uname=$(uname)
+  arch=$(uname -m)
+  suffix=""
+  case $uname in
+    "Darwin")
+      suffix="-darwin"
+      case $arch in
+      "arm64")
+      suffix="-darwin-arm64"
+      ;;
+      esac
+    ;;
+    "MINGW"*)
+    suffix=".exe"
+    ;;
+    "Linux")
+        case $arch in
+        "aarch64")
+        suffix="-arm64"
+        ;;
+        esac
+        case $arch in
+        "armv6l" | "armv7l")
+        suffix="-armhf"
+        ;;
+        esac
+    ;;
+    esac
 
-  url="$GH_REPO/releases/download/${version}/${TOOL_NAME}"
+  url="$GH_REPO/releases/download/${version}/${TOOL_NAME}${suffix}"
 
-  echo "* Downloading $TOOL_NAME release $version...  from $url"
+  echo "* Downloading $TOOL_NAME$suffix release $version...  from $url"
   curl "${curl_opts[@]}" -o "$filename" -C - "$url" || fail "Could not download $url"
 }
 
