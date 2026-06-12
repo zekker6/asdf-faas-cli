@@ -20,7 +20,7 @@ jobs:
         run: asdf plugin add asdf-faas-cli https://github.com/zekker6/asdf-faas-cli.git
 
       - name: Run plugin test
-        run: asdf plugin test asdf-faas-cli .
+        run: asdf plugin test asdf-faas-cli . --asdf-tool-version latest
 
       - name: Run install
         run: asdf install asdf-faas-cli latest
